@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /cats should return cats 1`] = `
+Object {
+  "_id": Any<String>,
+  "id": "MTgwODA3MA",
+  "url": "http://24.media.tumblr.com/tumblr_m82woaL5AD1rro1o5o1_1280.jpg",
+  "votes": 0,
+}
+`;
