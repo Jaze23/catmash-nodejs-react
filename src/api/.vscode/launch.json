@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "args": [
-                "${workspaceFolder}/src/server.ts"
+                "${workspaceFolder}/src/api/src/server.ts"
             ],
             "runtimeArgs": [
                 "--nolazy",

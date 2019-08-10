@@ -17,6 +17,7 @@ if (process.env.NODE_ENV !== "test") {
     { useNewUrlParser: true, useCreateIndex: true },
   );
 }
+
 // Load schemas into DI container
 mongooseSchemaLoader();
 
