@@ -17,7 +17,7 @@
                 "${workspaceFolder}/src/api/node_modules/ts-node/register"
             ],
             "sourceMaps": true,
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/src/api",
             "protocol": "inspector",
         },
         {
