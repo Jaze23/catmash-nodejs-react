@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import { connect } from "mongoose";
+import { connect, set } from "mongoose";
 import mongooseSchemaLoader from "./common/config/mongoose-schema-loader";
 import routerV1 from "./routers/router-v1";
 import { errorHandlerMiddleware, cls } from "./common/middlewares";
@@ -17,6 +17,9 @@ if (process.env.NODE_ENV !== "test") {
     { useNewUrlParser: true, useCreateIndex: true },
   );
 }
+
+// Make mongoose uses findOneAndUpdate() instead of findAndModify()
+set("useFindAndModify", false);
 
 // Load schemas into DI container
 mongooseSchemaLoader();

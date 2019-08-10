@@ -65,10 +65,6 @@ export default class CatService {
 
       cats.push(cat1!, cat2!);
 
-      if (cats.length === 0) {
-        throw new ErrorStatus("No cats have been found", 404);
-      }
-
       return cats;
     } catch (e) {
       throw e;
