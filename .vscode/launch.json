@@ -14,7 +14,7 @@
             "runtimeArgs": [
                 "--nolazy",
                 "-r",
-                "ts-node/register"
+                "${workspaceFolder}/src/api/node_modules/ts-node/register"
             ],
             "sourceMaps": true,
             "cwd": "${workspaceRoot}",
