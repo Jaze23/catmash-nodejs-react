@@ -50,18 +50,10 @@ export default class CatService {
   public async getVersus(): Promise<CatDto[]> {
     try {
       const cats: CatDto[] = [];
-      const count = await this.catSchema.estimatedDocumentCount();
-      let rdm = Math.floor(Math.random() * count);
+      const nbrOfTotalCats = await this.catSchema.estimatedDocumentCount();
 
-      const cat1 = await this.catSchema
-        .findOne({}, mProjection(new CatDto()))
-        .skip(rdm);
-
-      rdm = Math.floor(Math.random() * count);
-
-      const cat2 = await this.catSchema
-        .findOne({}, mProjection(new CatDto()))
-        .skip(rdm);
+      const cat1 = await this.getRandomCat(nbrOfTotalCats);
+      const cat2 = await this.getRandomCat(nbrOfTotalCats);
 
       cats.push(cat1!, cat2!);
 
@@ -69,6 +61,13 @@ export default class CatService {
     } catch (e) {
       throw e;
     }
+  }
+
+  public async getRandomCat(count: number) {
+    const rdm = Math.floor(Math.random() * count);
+    return await this.catSchema
+      .findOne({}, mProjection(new CatDto()))
+      .skip(rdm);
   }
 
   public async vote(cat: Cat): Promise<CatDto> {

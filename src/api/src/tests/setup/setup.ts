@@ -18,7 +18,7 @@ class SetupTest {
     // Connect to mongoose database
     await connect(
       uri,
-      { useNewUrlParser: true, useCreateIndex: true }
+      { useNewUrlParser: true, useCreateIndex: true },
     );
   }
 
@@ -32,4 +32,9 @@ const createCats = async () => {
   catSchema.create(cats.images);
 };
 
-export { SetupTest, createCats };
+const getACat = async () => {
+  const cat = await catSchema.find({});
+  return (await catSchema.find().limit(1))[0]!;
+};
+
+export { SetupTest, createCats, getACat };

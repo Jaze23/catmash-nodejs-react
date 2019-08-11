@@ -3,8 +3,40 @@
 exports[`GET /cats should return cats 1`] = `
 Object {
   "_id": Any<String>,
-  "id": "MTgwODA3MA",
-  "url": "http://24.media.tumblr.com/tumblr_m82woaL5AD1rro1o5o1_1280.jpg",
+  "id": Any<String>,
+  "url": Any<String>,
   "votes": 0,
+}
+`;
+
+exports[`GET /cats/versus should return 2 cats 1`] = `
+Object {
+  "_id": Any<String>,
+  "id": Any<String>,
+  "url": Any<String>,
+  "votes": 0,
+}
+`;
+
+exports[`PUT /cats/:id/vote should a 404 if the requested id does not exist 1`] = `
+Object {
+  "message": "Cat not found",
+  "status": 404,
+}
+`;
+
+exports[`PUT /cats/:id/vote should a 500 if the requested id is not a valid ObjectId 1`] = `
+Object {
+  "message": "Something went wrong",
+  "status": 500,
+}
+`;
+
+exports[`PUT /cats/:id/vote should add a vote to the cat 1`] = `
+Object {
+  "_id": Any<String>,
+  "id": Any<String>,
+  "url": Any<String>,
+  "votes": 1,
 }
 `;
