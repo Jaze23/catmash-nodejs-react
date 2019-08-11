@@ -85,7 +85,7 @@ export default class CatService {
     }
   }
 
-  public async getCatById(id: number): Promise<Cat> {
+  public async getCatById(id: string): Promise<Cat> {
     try {
       const cat = await this.catSchema.findById(id);
       if (!cat) {

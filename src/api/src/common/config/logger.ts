@@ -1,6 +1,7 @@
 import { Service } from "typedi/decorators/Service";
 import * as Winston from "winston";
 import { env } from "./env";
+const httpContext = require("express-cls-hooked");
 
 @Service()
 export class Logger {
@@ -33,6 +34,14 @@ export class Logger {
         Winston.format.json(),
       ),
       transports: this.transports,
+    });
+  }
+
+  public error(err: Error) {
+    this.winston.error("Error : %o", {
+      transactionId: httpContext.get("transactionId"),
+      message: err.message,
+      stack: err.stack,
     });
   }
 }

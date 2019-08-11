@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 import { Cat } from "./cat.interface";
-import { timedSchemaPre } from "../../../common/config/mongo-helper";
+import { timedSchemaPre } from "../../../common/config";
 
 const catSchema: Schema = new Schema({
   id: { type: String, required: true, unique: true },

@@ -1,23 +1,17 @@
 import { Response, Request } from "express";
 import * as uuid from "uuid";
-import { createNamespace } from "cls-hooked";
 import { ErrorStatus } from "../exceptions/error-status.model";
-const nsp = createNamespace("tunzUpRest");
+const httpContext = require("express-cls-hooked");
 
-export async function cls(
+export async function httpContextMiddleware(
   req: Request,
   res: Response,
   next: (err?: ErrorStatus) => void,
 ) {
   try {
-    nsp.bindEmitter(req);
-    nsp.bindEmitter(res);
-
-    nsp.run(() => {
-      const tid = uuid.v4();
-      nsp.set("transactionId", tid);
-      next();
-    });
+    const tid = uuid.v4();
+    httpContext.set("transactionId", tid);
+    next();
   } catch (e) {
     next(new ErrorStatus("invalid token", 401));
   }

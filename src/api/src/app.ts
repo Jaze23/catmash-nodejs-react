@@ -1,22 +1,17 @@
 import "reflect-metadata";
-import { env } from "./common/config";
 import express from "express";
+const httpContext = require("express-cls-hooked");
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import { connect, set } from "mongoose";
+import { set } from "mongoose";
 import mongooseSchemaLoader from "./common/config/mongoose-schema-loader";
 import routerV1 from "./routers/router-v1";
-import { errorHandlerMiddleware, cls } from "./common/middlewares";
+import { errorHandlerMiddleware, httpContextMiddleware } from "./common/middlewares";
 
 const app = express();
 
-if (process.env.NODE_ENV !== "test") {
-  connect(
-    env.database.url as string,
-    { useNewUrlParser: true, useCreateIndex: true },
-  );
-}
+app.use(httpContext.middleware);
 
 // Make mongoose uses findOneAndUpdate() instead of findAndModify()
 set("useFindAndModify", false);
@@ -35,8 +30,8 @@ app.set("port", process.env.PORT || 8080);
 app.use(bodyParser.json({ limit: "50MB" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Add the CLS
-app.use(cls);
+// Add the HttpContext
+app.use(httpContextMiddleware);
 
 // Register the router
 app.use(`/v1`, routerV1);

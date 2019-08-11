@@ -1,9 +1,16 @@
 import app from "./app";
 import Container from "typedi";
-import { ErrorHandler, Logger } from "./common/config";
+import { ErrorHandler, Logger, env } from "./common/config";
 import CatService from "./api/cats/cats.service";
+import { connect } from "mongoose";
 
 const startServer = async () => {
+  // Open a connection to mongodb
+  await connect(
+    env.database.url as string,
+    { useNewUrlParser: true, useCreateIndex: true },
+  );
+
   try {
     // Populate database
     await Container.get(CatService).populateCats();
