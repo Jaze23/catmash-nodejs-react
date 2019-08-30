@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     root: {
       width: "100%",
-      overflowX: "auto",
+      overflow: "scroll",
+      height: "80vh",
     },
     img: {
       width: "60%",
